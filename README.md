@@ -19,8 +19,6 @@ The files here are written by scripts in the GitHub repository [rodlibrary/Scrip
 | `p_path` | The full URL where the ARK resolves to |
 
 
-`resolve.csv` replaces `redirects.csv` from [rod-library/redirects](https://git.uni.edu/rod-library/redirects). It has the same columns.
-
 ## How it's updated
 
 1. **Minting.** Staff fill in `arks.csv` and run:
