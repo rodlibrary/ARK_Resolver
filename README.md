@@ -15,13 +15,9 @@ The files here are written by scripts in the GitHub repository [rodlibrary/Scrip
 
 | Column | Meaning |
 |---|---|
-| `dc_path` | Digital Commons path, if any: a landing-page key (`etd/123`) or a collection key (`etd`) |
-| `dc_article` | Digital Commons file key (`etd/1124`), if any |
-| `ark` | The ARK without `ark:/`, e.g. `32498/s3x7k9q2mbd` |
-| `preservica_ref` | The Preservica asset holding the ARK (`IO_<reference>`) |
-| `target_url` | Where the ARK resolves to |
-| `status` | `active`: resolve to `target_url`. `withdrawn`: served as HTTP 410 Gone. `unmatched`: not resolved yet. |
-| `notes` | Problems reported when minting, and when each ARK was matched in Preservica |
+| `ark` | The full ARK 
+| `p_path` | The full URL where the ARK resolves to |
+
 
 `resolve.csv` replaces `redirects.csv` from [rod-library/redirects](https://git.uni.edu/rod-library/redirects). It has the same columns.
 
