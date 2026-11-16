@@ -1,0 +1,39 @@
+# Checks resolve.csv on every change, with check_resolve.py from
+# rodlibrary/Scripts: header ark,p_path; every ark a full
+# https://library.uni.edu/ark:/32498/... address, listed once; every p_path a
+# full https:// address on an allowed host (or 410); a line break at the end.
+# The same rules as redirects.csv in rodlibrary/Redirects.
+name: Check resolve.csv
+
+on:
+  push:
+    branches: [main]
+    paths: [resolve.csv, ark_master_list.csv, .github/workflows/check.yml]
+  pull_request:
+    paths: [resolve.csv, ark_master_list.csv, .github/workflows/check.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+      - name: Get the ARK scripts
+        uses: actions/checkout@v6
+        with:
+          repository: rodlibrary/Scripts
+          ref: ${{ vars.SCRIPTS_REF || 'main' }}
+          path: scripts
+          sparse-checkout: arks
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Check resolve.csv
+        run: |
+          set -o pipefail
+          python3 scripts/arks/check_resolve.py resolve.csv --master-list ark_master_list.csv \
+            | tee -a "$GITHUB_STEP_SUMMARY"
